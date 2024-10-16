@@ -111,82 +111,100 @@
         </div>
     </div>
 
-    <body>
-        <div id="status"></div>
+    <script>
 
-        <script>
-            
-            const ids = [];
-            for (let i = 0; i < 36; i++) {
-                ids.push(`image${i}`);
+        const ids = [];
+        for (let i = 0; i < 36; i++) {
+            ids.push(`image${i}`);
+        }
+
+        let score = 0;
+
+        let locationsVisited = 0;
+
+        let lastLocation = 0;
+        const lionLocation = Math.floor(Math.random() * 36);;
+        const zebraLocations = [];
+        while (zebraLocations.length < 5) {
+            let randomPosition = Math.floor(Math.random() * 36);
+            if (!zebraLocations.includes(randomPosition) && randomPosition !== lionLocation) {
+                zebraLocations.push(randomPosition);
+            }
+        }
+
+        let gameOver = false;
+
+        function check(position) {
+            if (gameOver) return;
+
+            const id = ids[position];
+            const imageElement = document.getElementById(id);
+
+            if (position === lionLocation) {
+                imageElement.src = 'Lion.jpg';
+                gameOver = true;
+                score -= 2;
+            }
+            else if (zebraLocations.includes(position)) {
+                imageElement.src = 'Zebra.jpg';
+                score += 4;
+                zebraLocations = zebraLocations.filter(z => z !== position);
+            }
+            else {
+                imageElement.src = 'Elephant.jpg';
+                score += 1;
             }
 
-            let score = 0;
+            locationsVisited++;
+            lastLocation = position;
 
-            let locationsVisited = 0;
+            document.getElementById('score').innerHTML = `<p>Score is ${score}.</p>`;
+            document.getElementById('locations').innerHTML = `<p>Number of locations checked is ${locationsVisited}.</p>`;
+        }
 
-            let lastLocation = 0;
+        function help() {
+            const row = Math.floor(lastLocation / 6);
+            const col = lastLocation % 6;
 
-            const zebraLocations = [1, 8, 12, 22, 34];
+            const neighbors = [(lastLocation + 5) % 36, (lastLocation + 1) % 36, (lastLocation + 6) % 36,
+            (lastLocation + 30) % 36,
+            ];
 
-            const lionLocation = 14;
-
-            let gameOver = false;
-
-            function check(position) {
-                if (gameOver) return;
-
-                const id = ids[position];
-                const imageElement = document.getElementById(id);
-
-                if (position === lionLocation) {
-                    imageElement.src = 'Lion.jpg';
-                    gameOver = true;
-                    score -= 2;
-                } else if (zebraLocations.includes(position)) {
-                    imageElement.src = 'Zebra.jpg';
-                    score += 4;
-                } else {
-                    imageElement.src = 'Elephant.jpg';
-                    score += 1;
+            if (neighbors.some(n => zebraLocations.includes(n))) {
+                document.getElementById('help').innerText = "I see stripes";
+            }
+            else {
+                const lionRow = Math.floor(lionLocation / 6);
+                const lionCol = lionLocation % 6;
+                const rowDiff = Math.abs(lionRow - row);
+                const colDiff = Math.abs(lionCol - col);
+                if (rowDiff <= 1 && colDiff <= 1) {
+                    document.getElementById('help').innerText = "Rawr";
                 }
-
-                locationsVisited ++;
-                lastLocation = position;
-
-                document.getElementById('score').innerHTML = `<p>Score is ${score}.</p>`;
-                document.getElementById('locations').innerHTML = `<p>Number of locations checked is ${locationsVisited}.</p>`;
-            }
-
-            function help() {
-                const row = Math.floor(lastLocation / 6);
-                const col = lastLocation % 6;
-
-                const neighbors = [
-                    (lastLocation + 5) % 36,
-                    (lastLocation + 1) % 36,
-                    (lastLocation + 6) % 36,
-                    (lastLocation + 30) % 36,
-                ];
-
-                if (neighbors.some(n => zebraLocations.includes(n))) {
-                    document.getElementById('help').innerText = "I see stripes";
-                } 
                 else {
-                    const lionRow = Math.floor(lionLocation / 6);
-                    const lionCol = lionLocation % 6;
-                    const rowDiff = Math.abs(lionRow - row);
-                    const colDiff = Math.abs(lionCol - col);
-                    if (rowDiff <= 1 && colDiff <= 1) {
-                        document.getElementById('help').innerText = "Rawr";
-                    } 
-                    else {
-                        document.getElementById('help').innerText = "It's grey";
-                    }
+                    document.getElementById('help').innerText = "It's grey";
                 }
             }
-        </script>
+        }
+        function moveLion() {
+            const directions = [-1, 1, -6, 6];
+            const randomDir = directions[Math.floor(Math.random() * directions.length)];
+            lionLocation = (lionLocation + randomDir + 36) % 36;
+        }
 
-    </body>
+        function swap() {
+            const swap1 = Math.floor(Math.random() * 36);
+            let swap2 = Math.floor(Math.random() * 36);
+            while (swap2 === swap1) {
+                swap2 = Math.floor(Math.random() * 36);
+            }
+
+            const temp1 = document.getElementById(ids[swap1]);
+            const temp2 = document.getElementById(ids[swap2]);
+            [temp1, temp2] = [temp2, temp1];
+        }
+    </script>
+
+</body>
 
 </html>

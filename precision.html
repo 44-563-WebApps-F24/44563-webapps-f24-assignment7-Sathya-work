@@ -9,6 +9,32 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    body {
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    #target {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    #counter {
+      font-size: 1.5em;
+      margin-top: 10px;
+      color: #007bff;
+    }
+
+    .btn {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 
 <body>
@@ -40,12 +66,15 @@
       setTimeout(() => {
         if (stopTime === undefined) {
           document.getElementById("target").innerHTML = "Too Slow";
-        } else {
+        }
+        else {
           let elapsedTime = Date.now() - stopTime;
           document.getElementById("target").innerHTML = `Time was ${elapsedTime} ms.`;
         }
       }, 4000);
     }
+
+
   </script>
 
 </body>

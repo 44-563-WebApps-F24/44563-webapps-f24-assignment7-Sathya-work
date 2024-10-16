@@ -191,18 +191,6 @@
             const randomDir = directions[Math.floor(Math.random() * directions.length)];
             lionLocation = (lionLocation + randomDir + 36) % 36;
         }
-
-        function swap() {
-            const swap1 = Math.floor(Math.random() * 36);
-            let swap2 = Math.floor(Math.random() * 36);
-            while (swap2 === swap1) {
-                swap2 = Math.floor(Math.random() * 36);
-            }
-
-            const temp1 = document.getElementById(ids[swap1]);
-            const temp2 = document.getElementById(ids[swap2]);
-            [temp1, temp2] = [temp2, temp1];
-        }
     </script>
 
 </body>

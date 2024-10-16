@@ -3,6 +3,6 @@
 Assignment 7 on DOM
 
 Hosted at:
--.[safari.html](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Sathya-work/safari.html)
--.[precision.html](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Sathya-work/precision.html)
--.[divlist.html](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Sathya-work/divlist.html)
+- .[safari.html](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Sathya-work/safari.html)
+- .[precision.html](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Sathya-work/precision.html)
+- .[divlist.html](https://44-563-webapps-f24.github.io/44563-webapps-f24-assignment7-Sathya-work/divlist.html)

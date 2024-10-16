@@ -11,20 +11,33 @@
 		}
 
 		.flex-container>div {
-			/*div children of the flex container*/
 			background-color: #f1f1f1;
 			margin: 10px;
 			padding: 20px;
 			font-size: 30px;
 		}
 
-		/* Responsive layout */
 		@media (max-width: 600px) {
 			.flex-container {
 				flex-direction: column;
 				background-color: green;
 			}
 		}
+		button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            font-size: 16px;
+            background-color: green;
+            color: white;
+        }
+		input[type="text"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            font-size: 16px;
+        }
 	</style>
 </head>
 
@@ -32,7 +45,7 @@
 	<h2>Sathyanarayana builds list with divs</h2>
 
 	<input type="text" id="inputItem" placeholder="Enter item here">
-
+	
 	<div class="flex-container" id="target">
 		<div class="divlist">row item 1</div>
 		<div class="divlist">row item 2</div>
@@ -42,6 +55,8 @@
 	<p> Press the button to create an new element of type div and then add it to the container.
 	</p>
 	<button onclick="addEnd()">Add end</button>
+	<button onclick="addFront()">Add front</button>
+	<button onclick="remove()">Remove</button>
 
 	<script>
 		function addEnd() {
@@ -58,6 +73,35 @@
 			}
 			else {
 				alert("Please enter an item.");
+			}
+		}
+		function addFront() {
+			const inputValue = document.getElementById('inputItem').value;
+			if (inputValue) {
+				let element = document.createElement("div");
+				element.innerHTML = inputValue;
+				element.className = "divlist";
+
+				let container = document.getElementById('target');
+				container.insertBefore(element, container.firstChild);
+
+				document.getElementById('inputItem').value = '';
+			}
+			else {
+				alert("Please enter an item.");
+			}
+		}
+
+		function remove() {
+			let divListItems = document.getElementsByClassName("divlist");
+			let length = divListItems.length;
+
+			if (length > 0) {
+				let middleIndex = Math.floor(length / 2);
+				divListItems[middleIndex].remove();
+			}
+			else {
+				alert("No items to remove.");
 			}
 		}
 	</script>
